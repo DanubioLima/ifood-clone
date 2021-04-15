@@ -1,0 +1,30 @@
+.card {
+    padding: 16px 18px;
+    margin: 12px 0px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.cardInfo {
+    padding-left: 11px;
+}
+
+.cardInfo h5 {
+    color: #3f3e3e;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.cardInfo p,
+small {
+    color: #a6a2a9;
+}
+
+.cardActions {
+    display: flex;
+    padding-top: 6px;
+}
+
+.cardActions svg:last-child {
+    margin-left: 8px;
+}

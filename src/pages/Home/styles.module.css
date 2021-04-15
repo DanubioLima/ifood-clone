@@ -1,0 +1,80 @@
+.container {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    margin-top: 8px;
+}
+
+.title {
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 18px;
+    color: #3f3e3e;
+}
+
+.boxHeader {
+    max-height: 200px;
+}
+
+.boxSearch {
+    padding: 24px 0px;
+    position: relative;
+}
+
+.inputSearch {
+    position: relative;
+    background: #f2f2f2;
+    padding: 10px 16px;
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+}
+
+.inputSearch input {
+    border: none;
+    background: none;
+    font-size: 16px;
+    margin-left: 1em;
+    margin-top: 2px;
+}
+
+.inputSearch input::placeholder {
+    color: #8f8c8a;
+    font-weight: 500;
+}
+
+.location {
+    display: flex;
+    padding-bottom: 16px;
+}
+
+.locationBoxIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 16px;
+}
+
+.locationText h4 {
+    color: #3f3e3e;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.locationText p {
+    color: #a6a2a9;
+}
+
+.boxAddress {
+    background: #f2f2f2;
+    min-height: calc(100vh - 210px);
+    padding: 4px 14px;
+}
