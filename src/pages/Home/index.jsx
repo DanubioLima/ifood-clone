@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { MdMyLocation } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 import { locationService } from '../../services';
 
 import CardAddress from './components/CardAddress';
 import styles from './styles.module.css';
 
 export default function Home() {
+    const history = useHistory();
 
     const [currentAddress, setCurrentAdress] = useState('')
 
@@ -34,15 +36,18 @@ export default function Home() {
         })
     }
 
+    function goToSearchAddress() {
+        history.push('/search');
+    }
 
     return (
         <>
             <div className={`${styles.container} ${styles.boxHeader}`}>
                 <h2 className={styles.title}>Endereço de Entrega</h2>
                 <div className={styles.boxSearch}>
-                    <div className={styles.inputSearch}>
+                    <div className={styles.inputSearch} onClick={goToSearchAddress}>
                         <FiSearch color="#EA1D2C" size={24} />
-                        <input type="text" placeholder="Endereço e número" />
+                        <input type="text" disabled placeholder="Endereço e número" />
                     </div>
                 </div>
                 <div className={styles.location}>

@@ -17,8 +17,8 @@ export default function CardAddress() {
                 <small>porta vermelha</small>
             </Grid>
             <Grid container item xs={2} justify="flex-end" className={styles.cardActions}>
-                <AiFillCheckCircle color="#EA1D2C" size={18} />
-                <BsThreeDotsVertical color="#EA1D2C" size={18} />
+                <AiFillCheckCircle color="#EA1D2C" size={20} />
+                <BsThreeDotsVertical color="#EA1D2C" size={20} />
             </Grid>
         </Grid>
     )
