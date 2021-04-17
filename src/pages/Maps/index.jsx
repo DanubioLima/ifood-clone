@@ -67,7 +67,6 @@ function Maps() {
         const longitude = event.latLng.lng()
 
         locationService.getAddress(latitude, longitude).then(response => {
-            console.log(response)
             const splitAddress = response.formatted_address.replace(/((,\s)?\d{5}-\d{3}.*)/g, '').replace(/((,\s)?\d{1,})/g, '').split('-')
             if (localStorage.getItem('@gestor/editAddress')) {
                 const editAddress = JSON.parse(localStorage.getItem('@gestor/editAddress'))
