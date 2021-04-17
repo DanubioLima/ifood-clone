@@ -1,0 +1,112 @@
+.container {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    margin-top: 16px;
+}
+
+.header {
+    background: #fff;
+    box-shadow: 0px 20px 20px 20px #3c39396b;
+}
+
+.infoAddress {
+    text-align: center;
+    padding-top: 8px;
+}
+
+.infoAddress h5 {
+    font-size: 16px;
+    color: #777373;
+}
+
+.infoAddress p {
+    font-size: 15px;
+    color: #a6a29f;
+}
+
+.titlePage {
+    margin-bottom: 40px;
+}
+
+.titlePage h4 {
+    color: #3f3e3e;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.titlePage p {
+    color: #a6a29f;
+    font-size: 15px;
+}
+
+.subLabel {
+    color: #a6a29f;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.boxType {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0px;
+    border: 2px solid #d6d4d2;
+    border-radius: 4px;
+}
+
+.boxType span {
+    color: #d6d4d2;
+    margin-left: 10px;
+}
+
+.boxTypeSelected {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0px;
+    border: 2px solid #3f3e3e;
+    border-radius: 4px;
+}
+
+.boxTypeSelected span {
+    color: #3f3e3e;
+    margin-left: 10px;
+}
+
+.types {
+    margin-top: 32px;
+}
+
+.types > span {
+    color: #3f3e3e;
+    font-size: 16px;
+}
+
+.btnSave {
+    margin-top: 32px;
+    width: 100%;
+    padding: 14px 0px;
+    background: #ea1d2c;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.labelError {
+    color: #ea1d2c;
+    font-size: 13px;
+    margin-top: 6px;
+    font-weight: 500;
+}
