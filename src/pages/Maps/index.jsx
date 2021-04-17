@@ -135,8 +135,8 @@ function Maps() {
             <GoogleMap
                 mapContainerStyle={stylesMap}
                 center={{
-                    lat: parseFloat(coordinates.lat),
-                    lng: parseFloat(coordinates.lng)
+                    lat: +coordinates?.lat,
+                    lng: +coordinates?.lng
                 }}
                 options={
                     {

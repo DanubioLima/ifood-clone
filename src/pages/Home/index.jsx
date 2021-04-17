@@ -52,6 +52,7 @@ function ContentHome() {
     }, [])
 
     function getAddress() {
+        setSelectedAddress({})
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
             locationService.getAddress(latitude, longitude).then(response => {
@@ -99,7 +100,7 @@ function ContentHome() {
                     <Grid
                         key={item.id}
                         container
-                        className={selectedAddress.id === item.id ? styles.cardSelected : styles.card}
+                        className={selectedAddress.id === item.id ? `${styles.cardSelected} box` : `${styles.card} box`}
                         onClick={() => handleSelectAddress(item)}
                     >
                         <Grid container item xs={1} justify="center" alignItems="center" style={{ display: 'flex' }}>
@@ -118,7 +119,7 @@ function ContentHome() {
                         </Grid>
                         <Grid container item xs={2} justify="flex-end" className={styles.cardActions}>
                             {selectedAddress.id === item.id && (<AiFillCheckCircle color="#EA1D2C" size={20} />)}
-                            <BsThreeDotsVertical onClick={() => openModal(item)} color="#EA1D2C" size={20} />
+                            <BsThreeDotsVertical data-id="icon" onClick={() => openModal(item)} color="#EA1D2C" size={20} />
                         </Grid>
                     </Grid>
                 ))}

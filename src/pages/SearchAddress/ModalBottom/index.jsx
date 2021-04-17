@@ -3,6 +3,7 @@ import { Drawer } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 import styles from './styles.module.css';
+import './styles.css';
 
 export default function ModalBottom({ formattedAddress, open, close, coords }) {
     const history = useHistory()
