@@ -7,8 +7,14 @@ function AddressProvider({ children }) {
 
     const [listAddress, setListAddress] = useState(addresses)
 
+    function deleteAddress(item) {
+        const newList = listAddress.filter(address => address.id !== item.id)
+        setListAddress(newList)
+        localStorage.setItem('@gestor/listAddress', JSON.stringify(newList))
+    }
+
     return (
-        <AddressContext.Provider value={{ listAddress }}>
+        <AddressContext.Provider value={{ listAddress, deleteAddress }}>
             {children}
         </AddressContext.Provider>
     )

@@ -24,17 +24,33 @@ function Maps() {
                 setAddress(mountAddress.address)
                 setBtnText('Confirmar localização')
             } else {
-                const coords = JSON.parse(localStorage.getItem('@gestor/coords'))
-                setCoordinates(coords)
-                setBtnText('Continuar')
-                locationService.getAddress(coords.lat, coords.lng).then(response => {
-                    const splitAddress = response.formatted_address.replace(/((,\s)?\d{5}-\d{3}.*)/g, '').replace(/((,\s)?\d{2,})/g, '').split('-')
-                    const formattedAddres = {
-                        mainText: splitAddress[0],
-                        secondaryText: `${splitAddress[1]}-${splitAddress[2]}`
-                    }
-                    setAddress(formattedAddres)
-                })
+                if (localStorage.getItem('@gestor/editAddress')) {
+                    const { coords } = JSON.parse(localStorage.getItem('@gestor/editAddress'))
+                    setCoordinates(coords)
+                    setBtnText('Confirmar localização')
+                    locationService.getAddress(coords.lat, coords.lng).then(response => {
+                        const splitAddress = response.formatted_address.replace(/((,\s)?\d{5}-\d{3}.*)/g, '').replace(/((,\s)?\d{2,})/g, '').split('-')
+                        const formattedAddres = {
+                            mainText: splitAddress[0],
+                            secondaryText: `${splitAddress[1]}-${splitAddress[2]}`,
+                            number: response.address_components[0] ? response.address_components[0].short_name : ''
+                        }
+                        setAddress(formattedAddres)
+                    })
+                } else {
+                    const coords = JSON.parse(localStorage.getItem('@gestor/coords'))
+                    setCoordinates(coords)
+                    setBtnText('Continuar')
+                    locationService.getAddress(coords.lat, coords.lng).then(response => {
+                        const splitAddress = response.formatted_address.replace(/((,\s)?\d{5}-\d{3}.*)/g, '').replace(/((,\s)?\d{2,})/g, '').split('-')
+                        const formattedAddres = {
+                            mainText: splitAddress[0],
+                            secondaryText: `${splitAddress[1]}-${splitAddress[2]}`
+                        }
+                        setAddress(formattedAddres)
+                    })
+                }
+
             }
         }
 
@@ -53,20 +69,39 @@ function Maps() {
         locationService.getAddress(latitude, longitude).then(response => {
             console.log(response)
             const splitAddress = response.formatted_address.replace(/((,\s)?\d{5}-\d{3}.*)/g, '').replace(/((,\s)?\d{1,})/g, '').split('-')
-            const formattedAddress = {
-                address: {
-                    mainText: splitAddress[0].trim(),
-                    secondaryText: `${splitAddress[1]}-${splitAddress[2]}`,
-                    number: response.address_components[0] ? response.address_components[0].short_name : ''
-                },
-                coords: {
-                    lat: latitude,
-                    lng: longitude
+            if (localStorage.getItem('@gestor/editAddress')) {
+                const editAddress = JSON.parse(localStorage.getItem('@gestor/editAddress'))
+                const formattedAddress = {
+                    address: {
+                        mainText: splitAddress[0].trim(),
+                        secondaryText: `${splitAddress[1]}-${splitAddress[2]}`,
+                        number: response.address_components[0] ? response.address_components[0].short_name : '',
+                        complement: editAddress.address.complement,
+                        reference: editAddress.address.reference,
+                    },
+                    coords: {
+                        lat: latitude,
+                        lng: longitude
+                    },
+                    id: editAddress.id
                 }
-
+                localStorage.setItem('@gestor/editAddress', JSON.stringify(formattedAddress))
+                setAddress(formattedAddress.address)
+            } else {
+                const formattedAddress = {
+                    address: {
+                        mainText: splitAddress[0].trim(),
+                        secondaryText: `${splitAddress[1]}-${splitAddress[2]}`,
+                        number: response.address_components[0] ? response.address_components[0].short_name : '',
+                    },
+                    coords: {
+                        lat: latitude,
+                        lng: longitude
+                    },
+                }
+                localStorage.setItem('@gestor/mountAddress', JSON.stringify(formattedAddress))
+                setAddress(formattedAddress.address)
             }
-            localStorage.setItem('@gestor/mountAddress', JSON.stringify(formattedAddress))
-            setAddress(formattedAddress.address)
         })
     }
 
@@ -87,8 +122,12 @@ function Maps() {
         history.goBack()
     }
 
-    function goToSaveAddress() {
-        history.push('/save-address');
+    function goToFinishAddress() {
+        if (localStorage.getItem('@gestor/editAddress')) {
+            history.push('/edit-address');
+        } else {
+            history.push('/save-address');
+        }
     }
 
     return (
@@ -123,7 +162,7 @@ function Maps() {
                     </Grid>
                 </Grid>
                 <div className={styles.btnMain}>
-                    <button onClick={goToSaveAddress}>{btnText}</button>
+                    <button onClick={goToFinishAddress}>{btnText}</button>
                 </div>
             </GoogleMap>
         </div >

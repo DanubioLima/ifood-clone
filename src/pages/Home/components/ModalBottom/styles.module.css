@@ -1,0 +1,46 @@
+.container {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    margin-top: 8px;
+    height: 30vh;
+}
+
+.title {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.subTitle {
+    text-align: center;
+    font-size: 15px;
+    margin-top: 8px;
+    color: #a6a29f;
+}
+
+.item {
+    width: 100%;
+    border: 1px solid #a6a29f;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+.item span {
+    margin-left: 6px;
+}
+
+.btnCancel {
+    margin-top: 14px;
+    width: 100%;
+    color: #ea1d2c;
+    background: none;
+    border: none;
+    font-size: 16px;
+}

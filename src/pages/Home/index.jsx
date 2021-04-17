@@ -11,6 +11,8 @@ import { GiBackwardTime } from 'react-icons/gi';
 import { TiCoffee } from 'react-icons/ti';
 import { Grid } from '@material-ui/core';
 
+import ModalBottom from './components/ModalBottom'
+
 import styles from './styles.module.css';
 
 export default function Home() {
@@ -22,11 +24,13 @@ export default function Home() {
 }
 
 function ContentHome() {
-    const { listAddress } = useContext(AddressContext)
+    const { listAddress } = useContext(AddressContext);
     const history = useHistory();
 
     const [currentAddress, setCurrentAdress] = useState('')
     const [selectedAddress, setSelectedAddress] = useState({})
+    const [showModal, setShowModal] = useState(false)
+    const [itemSelected, setItemSelected] = useState({})
 
     useEffect(() => {
         function getAddress() {
@@ -65,6 +69,11 @@ function ContentHome() {
         setSelectedAddress(item)
     }
 
+    function openModal(item) {
+        setShowModal(true)
+        setItemSelected(item)
+    }
+
     return (
         <>
             <div className={`${styles.container} ${styles.boxHeader}`}>
@@ -87,33 +96,38 @@ function ContentHome() {
             </div>
             <div className={`${styles.container} ${styles.boxAddress}`}>
                 {listAddress?.map(item => (
-                    <>
-                        <Grid
-                            container
-                            className={selectedAddress.id === item.id ? styles.cardSelected : styles.card}
-                            onClick={() => handleSelectAddress(item)}
-                        >
-                            <Grid container item xs={1} justify="center" alignItems="center" style={{ display: 'flex' }}>
-                                {item.address.location === '' && (<GiBackwardTime size={24} color="#a6a29f" />)}
-                                {item.address.location === 'home' && (<BiHome size={24} color="#a6a29f" />)}
-                                {item.address.location === 'work' && (<TiCoffee size={24} color="#a6a29f" />)}
-                            </Grid>
-                            <Grid item xs={9} className={styles.cardInfo}>
-                                {item.address.location === '' && (<h5>{item.address.mainText}</h5>)}
-                                {item.address.location === 'home' && (<h5>Casa</h5>)}
-                                {item.address.location === 'work' && (<h5>Trabalho</h5>)}
-                                {item.address.location === '' && (<p>{item.address.secondaryText}</p>)}
-                                {item.address.location?.length > 0 && (<p>{item.address.mainText} - {item.address.secondaryText}</p>)}
-                                {item.address.complement === '' && (<small>{item.address.reference}</small>)}
-                                {item.address.complement?.length > 0 && (<small>{item.address.complement} - {item.address.reference}</small>)}
-                            </Grid>
-                            <Grid container item xs={2} justify="flex-end" className={styles.cardActions}>
-                                {selectedAddress.id === item.id && (<AiFillCheckCircle color="#EA1D2C" size={20} />)}
-                                <BsThreeDotsVertical color="#EA1D2C" size={20} />
-                            </Grid>
+                    <Grid
+                        key={item.id}
+                        container
+                        className={selectedAddress.id === item.id ? styles.cardSelected : styles.card}
+                        onClick={() => handleSelectAddress(item)}
+                    >
+                        <Grid container item xs={1} justify="center" alignItems="center" style={{ display: 'flex' }}>
+                            {item.address.location === '' && (<GiBackwardTime size={24} color="#a6a29f" />)}
+                            {item.address.location === 'home' && (<BiHome size={24} color="#a6a29f" />)}
+                            {item.address.location === 'work' && (<TiCoffee size={24} color="#a6a29f" />)}
                         </Grid>
-                    </>
+                        <Grid item xs={9} className={styles.cardInfo}>
+                            {item.address.location === '' && (<h5>{item.address.mainText.trim()}{`, ${item.address.number}`}</h5>)}
+                            {item.address.location === 'home' && (<h5>Casa</h5>)}
+                            {item.address.location === 'work' && (<h5>Trabalho</h5>)}
+                            {item.address.location === '' && (<p>{item.address.secondaryText}</p>)}
+                            {item.address.location?.length > 0 && (<p>{item.address.mainText.trim()}{`, ${item.address.number}`} - {item.address.secondaryText}</p>)}
+                            {item.address.complement === '' && (<small>{item.address.reference}</small>)}
+                            {item.address.complement?.length > 0 && (<small>{item.address.complement} - {item.address.reference}</small>)}
+                        </Grid>
+                        <Grid container item xs={2} justify="flex-end" className={styles.cardActions}>
+                            {selectedAddress.id === item.id && (<AiFillCheckCircle color="#EA1D2C" size={20} />)}
+                            <BsThreeDotsVertical onClick={() => openModal(item)} color="#EA1D2C" size={20} />
+                        </Grid>
+                    </Grid>
                 ))}
+                {showModal && (
+                    <ModalBottom
+                        open={showModal}
+                        close={() => setShowModal(false)}
+                        item={itemSelected}
+                    />)}
             </div>
         </>
     )

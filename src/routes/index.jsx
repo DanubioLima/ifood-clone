@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import SearchAddress from '../pages/SearchAddress';
 import Maps from '../pages/Maps';
 import SaveAddress from '../pages/SaveAddress';
+import EditAddress from '../pages/EditAddress';
 
 export default function Routes() {
     return (
@@ -14,6 +15,7 @@ export default function Routes() {
                 <Route exact path="/search" component={SearchAddress} />
                 <Route exact path="/maps" component={Maps} />
                 <Route exact path="/save-address" component={SaveAddress} />
+                <Route exact path="/edit-address" component={EditAddress} />
             </Switch>
         </BrowserRouter>
     )
