@@ -134,7 +134,10 @@ function Maps() {
         <div className={styles.container}>
             <GoogleMap
                 mapContainerStyle={stylesMap}
-                center={coordinates}
+                center={{
+                    lat: parseFloat(coordinates.lat),
+                    lng: parseFloat(coordinates.lng)
+                }}
                 options={
                     {
                         streetViewControl: false,
@@ -144,7 +147,7 @@ function Maps() {
                         mapTypeControl: false,
                     }
                 }
-                zoom={20}
+                zoom={19}
             >
                 {<Marker position={coordinates} draggable onDragEnd={handleMark} />}
                 <ButtonBase className={styles.btnLocation} onClick={goToCurrentLocation}>
