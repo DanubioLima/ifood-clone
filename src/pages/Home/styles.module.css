@@ -12,11 +12,11 @@
 }
 
 .title {
-    font-weight: 400;
+    font-weight: 500;
     text-transform: uppercase;
     text-align: center;
-    font-size: 18px;
-    color: #3f3e3e;
+    font-size: 17px;
+    color: #000;
 }
 
 .boxHeader {
@@ -48,8 +48,8 @@
 }
 
 .inputSearch input::placeholder {
-    color: #8f8c8a;
-    font-weight: 500;
+    color: #a6a29f;
+    font-weight: 600;
 }
 
 .location {

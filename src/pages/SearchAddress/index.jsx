@@ -36,12 +36,28 @@ export default function SearchAddress() {
         const latLng = await getLatLng(results[0])
         setDataAddress(suggestion.formattedSuggestion)
         setCoordinates(latLng)
-        const mountAddress = {
-            coords: latLng,
-            address: suggestion.formattedSuggestion
+        if (isNaN(suggestion?.terms[1].value)) {
+            const mountAddress = {
+                coords: latLng,
+                address: suggestion.formattedSuggestion
+            }
+            localStorage.setItem('@gestor/mountAddress', JSON.stringify(mountAddress))
+            setShowModalBottom(true)
+        } else {
+            const addressFormatted = {
+                mainText: suggestion.formattedSuggestion.mainText.replace(/((,\s)?\d{1,})/g, ''),
+                secondaryText: suggestion.formattedSuggestion.secondaryText
+            }
+            const mountAddress = {
+                coords: latLng,
+                address: {
+                    ...addressFormatted,
+                    number: suggestion.terms[1].value
+                }
+            }
+            localStorage.setItem('@gestor/mountAddress', JSON.stringify(mountAddress))
+            history.push('/maps')
         }
-        localStorage.setItem('@gestor/mountAddress', JSON.stringify(mountAddress))
-        setShowModalBottom(true)
     }
 
     return (

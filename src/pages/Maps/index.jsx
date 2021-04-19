@@ -125,7 +125,7 @@ function Maps() {
         if (localStorage.getItem('@gestor/editAddress')) {
             history.push('/edit-address');
         } else {
-            history.push('/save-address');
+            history.push('/save-address'); 
         }
     }
 
